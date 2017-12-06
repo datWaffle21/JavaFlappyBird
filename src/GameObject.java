@@ -1,10 +1,12 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
-public class GameObject {
+public abstract class GameObject {
 
 	protected float x, y;
 	protected ID id;
-	protected float velX, velY;
+	protected float velX;
+	protected static float velY;
 	
 	public GameObject(float x, float y, ID id) {
 		this.x = x;
@@ -40,6 +42,8 @@ public class GameObject {
 	public void setVelY(int velY) {
 		this.velY = velY;
 	}
-	
+	public float getVelX() {
+		return velX;
+	}
 	
 }
