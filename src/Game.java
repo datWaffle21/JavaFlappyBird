@@ -1,19 +1,28 @@
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
+
+	private static final long serialVersionUID = 1L;
+
+
+	public static final int WIDTH = 1000, HEIGHT = (WIDTH / 12 * 9);
 	
-	public static final int WIDTH = 1500, HEIGHT = (WIDTH / 12 * 9);
 	
+	private Handler handler;
 	private Thread thread;
 	private boolean running = false;
 	
-	private Handler handler;
+	
 	private Random r;
 	
 	public Game() {
 		
 		handler = new Handler();
+		this.addKeyListener(new KeyInput(handler));
 		//menu = new Menu(this, handler);
 	//	this.addKeyListener(new KeyInput(handler));
 	//	this.addMouseListener(menu);
@@ -22,6 +31,7 @@ public class Game extends Canvas implements Runnable{
 		
 		r= new Random();
 		
+		handler.addObject(new Player(WIDTH / 2, HEIGHT / 2, ID.Player, handler));
 	}
 	
 	public synchronized void start() {
@@ -44,6 +54,24 @@ public class Game extends Canvas implements Runnable{
 		handler.tick();
 		
 	}
+	
+	public void render() {
+		BufferStrategy bs = this.getBufferStrategy();
+		if(bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = bs.getDrawGraphics();
+		
+		g.setColor(Color.black);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		handler.render(g);
+		
+		g.dispose();
+		bs.show();		
+	}
 
 	public void run() {
 		this.requestFocus();
@@ -63,18 +91,30 @@ public class Game extends Canvas implements Runnable{
 			}
 			if(running) {
 				render();
-				frames++;
+			frames++;
 			}
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FRAMES: " + frames);
+				System.out.println("FPS: " + frames);
 				frames = 0;
 			}
 		}
 		stop();
 	}
 	
+	public static float clamp(float var, int min, int max) {
+		if(var >= max) {
+			return var = max;
+		} else if(var <= min) {
+			return var = min;
+		} else {
+			return var;
+		}
+	}
 	
+	public static void main(String[] args) {
+		new Game();
+	}
 	
 }
