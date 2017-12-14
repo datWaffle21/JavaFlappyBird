@@ -23,8 +23,12 @@ public class KeyInput extends KeyAdapter {
 			//	Player.velY *= -1; 
 				//Player.velY -= Player.upwardThrust;
 				down = true;
-				
-			
+			}
+		}
+		
+		if(Game.gameState == Game.STATE.End) {
+			if(key == KeyEvent.VK_ENTER) {
+				new Game();
 			}
 		}
 		

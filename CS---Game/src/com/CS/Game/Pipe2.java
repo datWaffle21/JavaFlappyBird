@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Pipe extends GameObject{
+public class Pipe2 extends GameObject{
 	
 	private Handler handler;
 	
-	Color greenValue = new Color(0, 180, 0);
+	Color greenValue = new Color( 0, 180, 0);
 
-	public Pipe(int x, int y, ID id, Handler handler) {
+	public Pipe2(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		
@@ -28,16 +28,16 @@ public class Pipe extends GameObject{
 	public void render(Graphics g) {
 	
 		g.setColor(greenValue);
-		g.fillRect(x, y, 50, 240);
-		g.fillRect(x - 8, y, 64, 28);
+		g.fillRect(x, y, 50, 425);
+		g.fillRect(x - 8, y + 400, 64, 28);
 		
 		g.setColor(Color.red);
-		g.drawRect(x - 10 , y, 64, 248); // hit box
+		g.drawRect(x - 10 , y, 64, 428); // hit box
 		
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x - 10 , y, 64, 248);
+		return new Rectangle(x - 10 , y, 64, 428);
 	}
 	
 	public Rectangle getLine() {

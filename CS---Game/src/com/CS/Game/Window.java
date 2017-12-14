@@ -31,8 +31,6 @@ public class Window {
 		frame.setVisible(true);
 		game.start();
 		
-		ImageIcon icon = new ImageIcon(list[0]);
-		Image img = icon.getImage();
 //		Image newImg = img.setScaledInstance(pic.getWidth(), pic.getHeight(), Image.SCALE_SMOOTH )
 	}
 	
